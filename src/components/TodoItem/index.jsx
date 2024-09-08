@@ -1,11 +1,22 @@
 import styles from "./todoItem.module.css"
+import { useState } from 'react';
 
 export default function TodoItem(props) {
+
+    const [isCompleted, setIsCompleted] = useState(false);
+
+    function completeTask() {
+        setIsCompleted(true);
+    }
+
     return (
-        <tr>
-                <td className={styles.center}>{props.id}</td>
-                <td>{props.tarefa}</td>
-                <td>{props.data}</td>
-        </tr>
+        <li style={{ textDecoration: isCompleted ? 'line-through' : 'none' }}>
+            {props.task}
+            {!isCompleted && (
+                <button onClick={() => completeTask()} style={{ marginLeft: '10px' }}>
+                    Concluir
+                </button>
+            )}
+        </li>
     )
 }
